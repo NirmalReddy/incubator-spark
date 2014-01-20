@@ -93,6 +93,28 @@ class JavaDStream[T](val dstream: DStream[T])(implicit val classTag: ClassTag[T]
    * returned DStream has exactly numPartitions partitions.
    */
   def repartition(numPartitions: Int): JavaDStream[T] = dstream.repartition(numPartitions)
+
+  /**
+   * Save each RDD in this DStream as a Sequence file of serialized objects.
+   * The file name at each batch interval is generated based on `prefix` and
+   * `suffix`: "prefix-TIME_IN_MS.suffix".
+   */
+  def saveAsObjectFiles(prefix: String, suffix: String = "") {
+    dstream.saveAsObjectFiles(prefix, suffix)
+  }
+
+  /**
+   * Save each RDD in this DStream as at text file, using string representation
+   * of elements. The file name at each batch interval is generated based on
+   * `prefix` and `suffix`: "prefix-TIME_IN_MS.suffix".
+   */
+  def saveAsTextFiles(prefix: String, suffix: String = "") {
+    dstream.saveAsTextFiles(prefix, suffix)
+  }
+
+  def register() {
+    dstream.register()
+  }
 }
 
 object JavaDStream {

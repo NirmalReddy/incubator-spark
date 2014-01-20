@@ -550,6 +550,16 @@ public class JavaAPISuite extends LocalJavaStreamingContext implements Serializa
         }
     );
 
+    JavaDStream<Double> transformed5 = stream1.transformWith(
+        stream2,
+        new Function2<JavaRDD<Integer>, JavaRDD<String>, JavaRDD<Double>>() {
+          @Override
+          public JavaRDD<Double> call(JavaRDD<Integer> rdd1, JavaRDD<String> rdd2) throws Exception {
+            return null;
+          }
+        }
+      );
+
     JavaDStream<Double> pairTransformed1 = pairStream1.transformWith(
         stream2,
         new Function3<JavaPairRDD<String, Integer>, JavaRDD<String>, Time, JavaRDD<Double>>() {
@@ -589,6 +599,16 @@ public class JavaAPISuite extends LocalJavaStreamingContext implements Serializa
           }
         }
     );
+
+    JavaDStream<Double> pairTransformed5 = pairStream1.transformWith(
+        stream2,
+        new Function3<JavaPairRDD<String, Integer>, JavaRDD<String>, Time, JavaRDD<Double>>() {
+          @Override
+          public JavaRDD<Double> call(JavaPairRDD<String, Integer> rdd1, JavaRDD<String> rdd2, Time time) throws Exception {
+            return null;
+          }
+        }
+      );
   }
 
   @Test
