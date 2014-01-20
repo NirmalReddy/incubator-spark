@@ -36,6 +36,7 @@ import org.apache.spark.streaming._
 import org.apache.spark.streaming.scheduler.StreamingListener
 import org.apache.hadoop.conf.Configuration
 import org.apache.spark.streaming.dstream.DStream
+import org.apache.hadoop.fs.Path
 
 /**
  * A Java-friendly version of [[org.apache.spark.streaming.StreamingContext]] which is the main
@@ -257,6 +258,33 @@ class JavaStreamingContext(val ssc: StreamingContext) {
     implicit val cmf: ClassTag[F] =
       implicitly[ClassTag[AnyRef]].asInstanceOf[ClassTag[F]]
     ssc.fileStream[K, V, F](directory)
+  }
+
+  /**
+   * Create a input stream that monitors a Hadoop-compatible filesystem
+   * for new files and reads them using the given key-value types and input format.
+   * Files must be written to the monitored directory by "moving" them from another
+   * location within the same file system.
+   * @param directory HDFS directory to monitor for new file
+   * @param filter Function to filter paths to process
+   * @param newFilesOnly Should process only new files and ignore existing files in the directory
+   * @tparam K Key type for reading HDFS file
+   * @tparam V Value type for reading HDFS file
+   * @tparam F Input format for reading HDFS file
+   */
+  def fileStream[K, V, F <: NewInputFormat[K, V]](
+      directory: String,
+      filter: JFunction[Path, Boolean],
+      newFilesOnly: Boolean
+    ): DStream[(K, V)] = {
+    implicit val cmk: ClassTag[K] =
+      implicitly[ClassTag[AnyRef]].asInstanceOf[ClassTag[K]]
+    implicit val cmv: ClassTag[V] =
+      implicitly[ClassTag[AnyRef]].asInstanceOf[ClassTag[V]]
+    implicit val cmf: ClassTag[F] =
+      implicitly[ClassTag[AnyRef]].asInstanceOf[ClassTag[F]]
+    def fn = (x: Path) => filter.apply(x).booleanValue()
+    ssc.fileStream(directory, fn, newFilesOnly)
   }
 
   /**
@@ -572,6 +600,30 @@ object JavaStreamingContext {
     val ssc = StreamingContext.getOrCreate(checkpointPath, () => {
       factory.create.ssc
     }, hadoopConf, createOnError)
+    new JavaStreamingContext(ssc)
+  }
+
+  /**
+   * Either recreate a StreamingContext from checkpoint data or create a new StreamingContext.
+   * If checkpoint data exists in the provided `checkpointPath`, then StreamingContext will be
+   * recreated from the checkpoint data. If the data does not exist, then the StreamingContext
+   * will be created by called the provided `creatingFunc`.
+   *
+   * @param checkpointPath Checkpoint directory used in an earlier StreamingContext program
+   * @param creatingFunc   Function to create a new StreamingContext
+   * @param hadoopConf     Optional Hadoop configuration if necessary for reading from the
+   *                       file system
+   * @param createOnError  Optional, whether to create a new StreamingContext if there is an
+   *                       error in reading checkpoint data. By default, an exception will be
+   *                       thrown on error.
+   */
+  def getOrCreate(
+      checkpointPath: String,
+      creatingFunc: Function0[StreamingContext],
+      hadoopConf: Configuration,
+      createOnError: Boolean
+    ): JavaStreamingContext = {
+    val ssc = StreamingContext.getOrCreate(checkpointPath, creatingFunc, hadoopConf, createOnError)
     new JavaStreamingContext(ssc)
   }
 
