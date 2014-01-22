@@ -111,10 +111,6 @@ class JavaDStream[T](val dstream: DStream[T])(implicit val classTag: ClassTag[T]
   def saveAsTextFiles(prefix: String, suffix: String = "") {
     dstream.saveAsTextFiles(prefix, suffix)
   }
-
-  def register() {
-    dstream.register()
-  }
 }
 
 object JavaDStream {
