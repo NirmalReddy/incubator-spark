@@ -17,6 +17,7 @@
 
 package org.apache.spark.streaming.api.java
 
+import java.util
 import java.util.{List => JList}
 import java.lang.{Long => JLong}
 
@@ -27,7 +28,6 @@ import org.apache.spark.streaming._
 import org.apache.spark.api.java.{JavaPairRDD, JavaRDDLike, JavaRDD}
 import org.apache.spark.api.java.function.{Function => JFunction, Function2 => JFunction2}
 import org.apache.spark.api.java.function.{Function3 => JFunction3, _}
-import java.util
 import org.apache.spark.rdd.RDD
 import JavaDStream._
 import org.apache.spark.streaming.dstream.DStream

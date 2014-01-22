@@ -17,18 +17,18 @@
 
 package org.apache.spark.streaming;
 
-import scala.Tuple2;
-
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Test;
 import java.io.*;
 import java.util.*;
+
+import scala.Tuple2;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.google.common.collect.Sets;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Test;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.HashPartitioner;

@@ -17,13 +17,13 @@
 
 package org.apache.spark.streaming.api.java
 
+import scala.reflect.ClassTag
+
 import org.apache.spark.streaming.{Duration, Time}
 import org.apache.spark.api.java.function.{Function => JFunction}
 import org.apache.spark.api.java.JavaRDD
-import org.apache.spark.storage.StorageLevel
 import org.apache.spark.rdd.RDD
-
-import scala.reflect.ClassTag
+import org.apache.spark.storage.StorageLevel
 import org.apache.spark.streaming.dstream.DStream
 
 /**

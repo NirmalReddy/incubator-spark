@@ -18,13 +18,15 @@
 package org.apache.spark.streaming.api.java
 
 
-import scala.collection.JavaConversions._
-import scala.reflect.ClassTag
-
 import java.io.InputStream
 import java.util.{List => JList, Map => JMap}
 
+import scala.collection.JavaConversions._
+import scala.reflect.ClassTag
+
 import akka.actor.{Props, SupervisorStrategy}
+import org.apache.hadoop.conf.Configuration
+import org.apache.hadoop.fs.Path
 import org.apache.hadoop.mapreduce.{InputFormat => NewInputFormat}
 
 import org.apache.spark.{SparkConf, SparkContext}
@@ -34,9 +36,7 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.streaming._
 import org.apache.spark.streaming.scheduler.StreamingListener
-import org.apache.hadoop.conf.Configuration
 import org.apache.spark.streaming.dstream.DStream
-import org.apache.hadoop.fs.Path
 
 /**
  * A Java-friendly version of [[org.apache.spark.streaming.StreamingContext]] which is the main
