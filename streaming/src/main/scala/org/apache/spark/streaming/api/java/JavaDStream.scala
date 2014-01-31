@@ -96,11 +96,28 @@ class JavaDStream[T](val dstream: DStream[T])(implicit val classTag: ClassTag[T]
 
   /**
    * Save each RDD in this DStream as a Sequence file of serialized objects.
+   * The file name at each batch interval is generated based on `prefix`.
+   */
+  def saveAsObjectFiles(prefix: String) {
+    dstream.saveAsObjectFiles(prefix)
+  }
+
+  /**
+   * Save each RDD in this DStream as a Sequence file of serialized objects.
    * The file name at each batch interval is generated based on `prefix` and
    * `suffix`: "prefix-TIME_IN_MS.suffix".
    */
-  def saveAsObjectFiles(prefix: String, suffix: String = "") {
+  def saveAsObjectFiles(prefix: String, suffix: String) {
     dstream.saveAsObjectFiles(prefix, suffix)
+  }
+
+  /**
+   * Save each RDD in this DStream as at text file, using string representation
+   * of elements. The file name at each batch interval is generated based on
+   * `prefix`.
+   */
+  def saveAsTextFiles(prefix: String) {
+    dstream.saveAsTextFiles(prefix)
   }
 
   /**
@@ -108,7 +125,7 @@ class JavaDStream[T](val dstream: DStream[T])(implicit val classTag: ClassTag[T]
    * of elements. The file name at each batch interval is generated based on
    * `prefix` and `suffix`: "prefix-TIME_IN_MS.suffix".
    */
-  def saveAsTextFiles(prefix: String, suffix: String = "") {
+  def saveAsTextFiles(prefix: String, suffix: String) {
     dstream.saveAsTextFiles(prefix, suffix)
   }
 }
