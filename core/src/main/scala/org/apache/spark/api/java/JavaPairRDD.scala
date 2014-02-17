@@ -20,7 +20,6 @@ package org.apache.spark.api.java
 import java.util.{List => JList}
 import java.util.Comparator
 
-import scala.Tuple2
 import scala.collection.JavaConversions._
 import scala.reflect.ClassTag
 
@@ -544,6 +543,26 @@ class JavaPairRDD[K, V](val rdd: RDD[(K, V)])(implicit val kClassTag: ClassTag[K
     rdd.saveAsHadoopFile(path, keyClass, valueClass, outputFormatClass, codec)
   }
 
+  /** Output the RDD to any Hadoop-supported file system, compressing with the supplied codec. */
+  def saveAsHadoopFile[F <: OutputFormat[K, V]](path: String, codec: Class[_ <: CompressionCodec]) {
+    implicit val fm: ClassTag[F] = implicitly[ClassTag[AnyRef]].asInstanceOf[ClassTag[F]]
+    rdd.saveAsHadoopFile(path, getKeyClass, getValueClass,
+      fm.runtimeClass.asInstanceOf[Class[F]], codec)
+  }
+
+  /** Output the RDD to any Hadoop-supported file system. */
+  def saveAsHadoopFile[F <: OutputFormat[K, V]](path: String) {
+    implicit val fm: ClassTag[F] = implicitly[ClassTag[AnyRef]].asInstanceOf[ClassTag[F]]
+    rdd.saveAsHadoopFile(path, getKeyClass, getValueClass, fm.runtimeClass.asInstanceOf[Class[F]])
+  }
+
+  /** Output the RDD to any Hadoop-supported file system. */
+  def saveAsNewAPIHadoopFile[F <: NewOutputFormat[K, V]](path: String) {
+    implicit val fm: ClassTag[F] = implicitly[ClassTag[AnyRef]].asInstanceOf[ClassTag[F]]
+    rdd.saveAsNewAPIHadoopFile(path, getKeyClass, getValueClass,
+      fm.runtimeClass.asInstanceOf[Class[F]])
+  }
+
   /** Output the RDD to any Hadoop-supported file system. */
   def saveAsNewAPIHadoopFile[F <: NewOutputFormat[_, _]](
     path: String,
@@ -679,6 +698,11 @@ class JavaPairRDD[K, V](val rdd: RDD[(K, V)])(implicit val kClassTag: ClassTag[K
     rdd.setName(name)
     this
   }
+
+  private[spark] def getKeyClass() = implicitly[ClassTag[K]].runtimeClass
+
+  private[spark] def getValueClass() = implicitly[ClassTag[V]].runtimeClass
+
 }
 
 object JavaPairRDD {
