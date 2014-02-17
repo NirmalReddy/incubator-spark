@@ -145,7 +145,7 @@ class JavaStreamingContext(val ssc: StreamingContext) {
   val sc: JavaSparkContext = sparkContext
 
   /** The underlying SparkContext */
-  val sparkContext = new JavaSparkContext(ssc.sc)
+  val sparkContext: JavaSparkContext = new JavaSparkContext(ssc.sc)
 
   /**
    * Create an input stream from network source hostname:port. Data is received using
@@ -185,8 +185,8 @@ class JavaStreamingContext(val ssc: StreamingContext) {
       hostname: String,
       port: Int,
       converter: JFunction[InputStream, java.lang.Iterable[T]],
-      storageLevel: StorageLevel)
-  : JavaDStream[T] = {
+      storageLevel: StorageLevel
+    ): JavaDStream[T] = {
     def fn = (x: InputStream) => converter.apply(x).toIterator
     implicit val cmt: ClassTag[T] =
       implicitly[ClassTag[AnyRef]].asInstanceOf[ClassTag[T]]
@@ -218,7 +218,8 @@ class JavaStreamingContext(val ssc: StreamingContext) {
   def rawSocketStream[T](
       hostname: String,
       port: Int,
-      storageLevel: StorageLevel): JavaDStream[T] = {
+      storageLevel: StorageLevel
+    ): JavaDStream[T] = {
     implicit val cmt: ClassTag[T] =
       implicitly[ClassTag[AnyRef]].asInstanceOf[ClassTag[T]]
     JavaDStream.fromDStream(ssc.rawSocketStream(hostname, port, storageLevel))
@@ -296,7 +297,7 @@ class JavaStreamingContext(val ssc: StreamingContext) {
       props: Props,
       name: String,
       storageLevel: StorageLevel
-  ): JavaDStream[T] = {
+    ): JavaDStream[T] = {
     implicit val cm: ClassTag[T] =
       implicitly[ClassTag[AnyRef]].asInstanceOf[ClassTag[T]]
     ssc.actorStream[T](props, name, storageLevel)
@@ -368,7 +369,8 @@ class JavaStreamingContext(val ssc: StreamingContext) {
   def queueStream[T](
       queue: java.util.Queue[JavaRDD[T]],
       oneAtATime: Boolean,
-      defaultRDD: JavaRDD[T]): JavaDStream[T] = {
+      defaultRDD: JavaRDD[T]
+    ): JavaDStream[T] = {
     implicit val cm: ClassTag[T] =
       implicitly[ClassTag[AnyRef]].asInstanceOf[ClassTag[T]]
     val sQueue = new scala.collection.mutable.Queue[RDD[T]]
@@ -477,31 +479,41 @@ class JavaStreamingContext(val ssc: StreamingContext) {
   /**
    * Start the execution of the streams.
    */
-  def start() = ssc.start()
+  def start() {
+    ssc.start()
+  }
 
   /**
    * Wait for the execution to stop. Any exceptions that occurs during the execution
    * will be thrown in this thread.
    */
-  def awaitTermination() = ssc.awaitTermination()
+  def awaitTermination() {
+    ssc.awaitTermination()
+  }
 
   /**
    * Wait for the execution to stop. Any exceptions that occurs during the execution
    * will be thrown in this thread.
    * @param timeout time to wait in milliseconds
    */
-  def awaitTermination(timeout: Long) = ssc.awaitTermination(timeout)
+  def awaitTermination(timeout: Long) {
+    ssc.awaitTermination(timeout)
+  }
 
   /**
    * Stop the execution of the streams. Will stop the associated JavaSparkContext as well.
    */
-  def stop() = ssc.stop()
+  def stop() {
+    ssc.stop()
+  }
 
   /**
    * Stop the execution of the streams.
    * @param stopSparkContext Stop the associated SparkContext or not
    */
-  def stop(stopSparkContext: Boolean) = ssc.stop(stopSparkContext)
+  def stop(stopSparkContext: Boolean) {
+    ssc.stop(stopSparkContext)
+  }
 }
 
 /**
@@ -579,7 +591,7 @@ object JavaStreamingContext {
    * Find the JAR from which a given class was loaded, to make it easy for users to pass
    * their JARs to StreamingContext.
    */
-  def jarOfClass(cls: Class[_]) = SparkContext.jarOfClass(cls).toArray
+  def jarOfClass(cls: Class[_]): Array[String] = SparkContext.jarOfClass(cls).toArray
 }
 
 /**
