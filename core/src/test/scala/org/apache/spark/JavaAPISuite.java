@@ -22,12 +22,12 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
-import com.google.common.base.Optional;
 import scala.Tuple2;
 
+import com.google.common.base.Optional;
 import com.google.common.base.Charsets;
-import org.apache.hadoop.io.compress.DefaultCodec;
 import com.google.common.io.Files;
+import org.apache.hadoop.io.compress.DefaultCodec;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.SequenceFileInputFormat;
@@ -38,10 +38,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.apache.spark.api.java.JavaDoubleRDD;
-import org.apache.spark.api.java.JavaPairRDD;
-import org.apache.spark.api.java.JavaRDD;
-import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.*;
 import org.apache.spark.api.java.function.*;
 import org.apache.spark.partial.BoundedDouble;
 import org.apache.spark.partial.PartialResult;
@@ -978,5 +975,56 @@ public class JavaAPISuite implements Serializable {
     });
     pairRDD.collect();  // Works fine
     Map<Integer, int[]> map = pairRDD.collectAsMap();  // Used to crash with ClassCastException
+  }
+
+  @Test
+  public void countAsync() throws Exception{
+    JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(new Integer[]{}));
+    JavaAsyncRDD<Integer> asyncrdd = new JavaAsyncRDD<Integer>(rdd.rdd(), null);
+    Assert.assertEquals((long)0, asyncrdd.countAsync().get());
+
+    List<Integer> myList = new ArrayList<Integer>();
+    for(int i = 0; i<10000; i++) {
+      myList.add(i);
+    }
+
+    asyncrdd = new JavaAsyncRDD<Integer>(sc.parallelize(myList, 5).rdd(), null);
+    Assert.assertEquals((long)10000, asyncrdd.countAsync().get());
+  }
+
+  @Test
+  public void foreachAsync() throws Exception {
+    List<Integer> myList = new ArrayList<Integer>();
+    for(int i = 0; i<1000; i++) {
+      myList.add(i);
+    }
+    final Accumulator<Integer> intAccum = sc.intAccumulator(10);
+    JavaAsyncRDD<Integer> asyncrdd = new JavaAsyncRDD<Integer>(
+      sc.parallelize(myList, 3).rdd(), null);
+    asyncrdd.foreachAsync(new VoidFunction<Integer>() {
+      @Override
+      public void call(Integer i)  {
+        intAccum.add(1);
+      }
+    }).get();
+    Assert.assertEquals((Integer)1000, intAccum.value());
+  }
+
+  @Test
+  public void foreachPartitionAsync() throws Exception {
+    List<Integer> myList = new ArrayList<Integer>();
+    for(int i = 0; i<1000; i++) {
+      myList.add(i);
+    }
+    final Accumulator<Integer> intAccum = sc.intAccumulator(10);
+    JavaAsyncRDD<Integer> asyncrdd = new JavaAsyncRDD<Integer>(
+      sc.parallelize(myList, 9).rdd(), null);
+    asyncrdd.foreachPartitionAsync(new VoidFunction<Iterator<Integer>>() {
+      @Override
+      public void call(Iterator<Integer> integerIterator) throws Exception {
+        intAccum.add(1);
+      }
+    }).get();
+    Assert.assertEquals((Integer)9, intAccum.value());
   }
 }
