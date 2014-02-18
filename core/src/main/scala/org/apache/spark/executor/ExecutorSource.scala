@@ -36,9 +36,9 @@ class ExecutorSource(val executor: Executor, executorId: String) extends Source 
     })
   }
 
-  val metricRegistry = new MetricRegistry()
+  val metricRegistry: MetricRegistry = new MetricRegistry()
   // TODO: It would be nice to pass the application name here
-  val sourceName = "executor.%s".format(executorId)
+  val sourceName: String = "executor.%s".format(executorId)
 
   // Gauge for executor thread pool's actively executing task counts
   metricRegistry.register(MetricRegistry.name("threadpool", "activeTasks"), new Gauge[Int] {

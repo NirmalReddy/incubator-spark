@@ -36,15 +36,15 @@ class MetricsServlet(val property: Properties, val registry: MetricRegistry) ext
 
   val SERVLET_DEFAULT_SAMPLE = false
 
-  val servletPath = property.getProperty(SERVLET_KEY_PATH)
+  val servletPath: String = property.getProperty(SERVLET_KEY_PATH)
 
-  val servletShowSample = Option(property.getProperty(SERVLET_KEY_SAMPLE)).map(_.toBoolean)
+  val servletShowSample: Boolean = Option(property.getProperty(SERVLET_KEY_SAMPLE)).map(_.toBoolean)
     .getOrElse(SERVLET_DEFAULT_SAMPLE)
 
-  val mapper = new ObjectMapper().registerModule(
+  val mapper: ObjectMapper = new ObjectMapper().registerModule(
     new MetricsModule(TimeUnit.SECONDS, TimeUnit.MILLISECONDS, servletShowSample))
 
-  def getHandlers = Array[(String, Handler)](
+  def getHandlers: Array[(String, Handler)] = Array[(String, Handler)](
     (servletPath, JettyUtils.createHandler(request => getMetricsSnapshot(request), "text/json"))
   )
 
