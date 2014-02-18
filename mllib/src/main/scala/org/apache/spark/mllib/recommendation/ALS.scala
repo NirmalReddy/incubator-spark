@@ -208,7 +208,7 @@ class ALS private (var numBlocks: Int, var rank: Int, var iterations: Int, var l
    * @param factors the (block-distributed) user or product factor vectors
    * @return Option[YtY] - whose value is only used in the implicit preference model
    */
-  def computeYtY(factors: RDD[(Int, Array[Array[Double]])]) = {
+  def computeYtY(factors: RDD[(Int, Array[Array[Double]])]): Option[DoubleMatrix] = {
     if (implicitPrefs) {
       Option(
         factors.flatMapValues{ case factorArray =>

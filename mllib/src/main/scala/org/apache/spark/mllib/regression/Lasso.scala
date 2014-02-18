@@ -77,7 +77,7 @@ class LassoWithSGD private (
    */
   def this() = this(1.0, 100, 1.0, 1.0)
 
-  def createModel(weights: Array[Double], intercept: Double) = {
+  def createModel(weights: Array[Double], intercept: Double): LassoModel = {
     val weightsMat = new DoubleMatrix(weights.length + 1, 1, (Array(intercept) ++ weights):_*)
     val weightsScaled = weightsMat.div(xColSd)
     val interceptScaled = yMean - (weightsMat.transpose().mmul(xColMean.div(xColSd)).get(0))

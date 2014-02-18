@@ -71,7 +71,7 @@ class SVMWithSGD private (
    */
   def this() = this(1.0, 100, 1.0, 1.0)
 
-  def createModel(weights: Array[Double], intercept: Double) = {
+  def createModel(weights: Array[Double], intercept: Double): SVMModel = {
     new SVMModel(weights, intercept)
   }
 }

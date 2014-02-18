@@ -72,7 +72,7 @@ class NaiveBayes private (var lambda: Double)
    *
    * @param data RDD of (label, array of features) pairs.
    */
-  def run(data: RDD[LabeledPoint]) = {
+  def run(data: RDD[LabeledPoint]): NaiveBayesModel = {
     // Aggregates all sample points to driver side to get sample count and summed feature vector
     // for each label.  The shape of `zeroCombiner` & `aggregated` is:
     //
