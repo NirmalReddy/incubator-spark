@@ -105,7 +105,7 @@ abstract class DStream[T: ClassTag] (
   private[streaming] def parentRememberDuration = rememberDuration
 
   /** Return the StreamingContext associated with this DStream */
-  def context = ssc
+  def context: StreamingContext = ssc
 
   /** Persist the RDDs of this DStream with the given storage level */
   def persist(level: StorageLevel): DStream[T] = {
@@ -503,14 +503,18 @@ abstract class DStream[T: ClassTag] (
    * 'this' DStream will be registered as an output stream and therefore materialized.
    */
   @deprecated("use foreachRDD", "0.9.0")
-  def foreach(foreachFunc: RDD[T] => Unit) = this.foreachRDD(foreachFunc)
+  def foreach(foreachFunc: RDD[T] => Unit) {
+    this.foreachRDD(foreachFunc)
+  }
 
   /**
    * Apply a function to each RDD in this DStream. This is an output operator, so
    * 'this' DStream will be registered as an output stream and therefore materialized.
    */
   @deprecated("use foreachRDD", "0.9.0")
-  def foreach(foreachFunc: (RDD[T], Time) => Unit) = this.foreachRDD(foreachFunc)
+  def foreach(foreachFunc: (RDD[T], Time) => Unit) {
+    this.foreachRDD(foreachFunc)
+  }
 
   /**
    * Apply a function to each RDD in this DStream. This is an output operator, so
