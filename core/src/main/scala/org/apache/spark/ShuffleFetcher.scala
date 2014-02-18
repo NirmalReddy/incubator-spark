@@ -17,7 +17,6 @@
 
 package org.apache.spark
 
-import org.apache.spark.executor.TaskMetrics
 import org.apache.spark.serializer.Serializer
 
 

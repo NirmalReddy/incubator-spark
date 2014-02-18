@@ -20,9 +20,9 @@ package org.apache.spark
 import java.util.concurrent.Semaphore
 
 import scala.concurrent.Await
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
 import scala.concurrent.future
-import scala.concurrent.ExecutionContext.Implicits.global
 
 import org.scalatest.{BeforeAndAfter, FunSuite}
 import org.scalatest.matchers.ShouldMatchers

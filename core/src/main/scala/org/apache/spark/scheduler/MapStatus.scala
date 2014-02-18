@@ -17,8 +17,9 @@
 
 package org.apache.spark.scheduler
 
+import java.io.{ObjectInput, ObjectOutput, Externalizable}
+
 import org.apache.spark.storage.BlockManagerId
-import java.io.{ObjectOutput, ObjectInput, Externalizable}
 
 /**
  * Result returned by a ShuffleMapTask to a scheduler. Includes the block manager address that the

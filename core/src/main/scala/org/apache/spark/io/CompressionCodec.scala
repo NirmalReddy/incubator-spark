@@ -20,9 +20,9 @@ package org.apache.spark.io
 import java.io.{InputStream, OutputStream}
 
 import com.ning.compress.lzf.{LZFInputStream, LZFOutputStream}
-
 import org.xerial.snappy.{SnappyInputStream, SnappyOutputStream}
-import org.apache.spark.{SparkEnv, SparkConf}
+
+import org.apache.spark.SparkConf
 
 
 /**

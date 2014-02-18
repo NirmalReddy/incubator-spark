@@ -19,12 +19,11 @@ package org.apache.spark
 
 import java.io._
 import java.net.URI
-import java.util.{UUID, Properties}
+import java.util.{Properties, UUID}
 import java.util.concurrent.atomic.AtomicInteger
 
 import scala.collection.{Map, Set}
 import scala.collection.generic.Growable
-
 import scala.collection.mutable.{ArrayBuffer, HashMap}
 import scala.reflect.{ClassTag, classTag}
 
@@ -48,8 +47,8 @@ import org.apache.spark.scheduler.cluster.mesos.{CoarseMesosSchedulerBackend, Me
 import org.apache.spark.scheduler.local.LocalBackend
 import org.apache.spark.storage.{BlockManagerSource, RDDInfo, StorageStatus, StorageUtils}
 import org.apache.spark.ui.SparkUI
-import org.apache.spark.util.{Utils, TimeStampedHashMap, MetadataCleaner, MetadataCleanerType,
-  ClosureCleaner}
+import org.apache.spark.util.{ClosureCleaner, MetadataCleaner, MetadataCleanerType,
+ TimeStampedHashMap, Utils}
 
 /**
  * Main entry point for Spark functionality. A SparkContext represents the connection to a Spark

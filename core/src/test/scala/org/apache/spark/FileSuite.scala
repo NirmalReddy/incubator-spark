@@ -17,15 +17,14 @@
 
 package org.apache.spark
 
-import java.io.{FileWriter, PrintWriter, File}
+import java.io.{File, FileWriter}
 
 import scala.io.Source
 
 import com.google.common.io.Files
-import org.scalatest.FunSuite
 import org.apache.hadoop.io._
-import org.apache.hadoop.io.compress.{DefaultCodec, CompressionCodec, GzipCodec}
-
+import org.apache.hadoop.io.compress.DefaultCodec
+import org.scalatest.FunSuite
 
 import SparkContext._
 

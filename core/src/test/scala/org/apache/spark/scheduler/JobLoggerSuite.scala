@@ -17,11 +17,6 @@
 
 package org.apache.spark.scheduler
 
-import java.util.Properties
-import java.util.concurrent.LinkedBlockingQueue
-
-import scala.collection.mutable
-
 import org.scalatest.FunSuite
 import org.scalatest.matchers.ShouldMatchers
 

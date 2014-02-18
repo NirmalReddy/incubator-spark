@@ -17,12 +17,14 @@
 
 package org.apache.spark.rdd
 
-import org.apache.spark._
 import java.io.{ObjectOutputStream, IOException}
-import scala.collection.mutable
+
 import scala.Some
+import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 import scala.reflect.ClassTag
+
+import org.apache.spark._
 
 /**
  * Class that captures a coalesced RDD by essentially keeping track of parent partitions

@@ -17,19 +17,17 @@
 
 package org.apache.spark.api.java
 
+import java.lang.Double
+
 import scala.reflect.ClassTag
 
-import org.apache.spark.rdd.RDD
+import org.apache.spark.Partitioner
 import org.apache.spark.SparkContext.doubleRDDToDoubleRDDFunctions
 import org.apache.spark.api.java.function.{Function => JFunction}
-import org.apache.spark.util.StatCounter
 import org.apache.spark.partial.{BoundedDouble, PartialResult}
+import org.apache.spark.rdd.RDD
 import org.apache.spark.storage.StorageLevel
-
-import java.lang.Double
-import org.apache.spark.Partitioner
-
-import scala.collection.JavaConverters._
+import org.apache.spark.util.StatCounter
 
 class JavaDoubleRDD(val srdd: RDD[scala.Double]) extends JavaRDDLike[Double, JavaDoubleRDD] {
 

@@ -20,7 +20,7 @@ package org.apache.spark
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.HashMap
 
-import org.apache.spark.executor.{ShuffleReadMetrics, TaskMetrics}
+import org.apache.spark.executor.ShuffleReadMetrics
 import org.apache.spark.serializer.Serializer
 import org.apache.spark.storage.{BlockId, BlockManagerId, ShuffleBlockId}
 import org.apache.spark.util.CompletionIterator

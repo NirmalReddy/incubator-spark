@@ -18,6 +18,7 @@
 package org.apache.spark.metrics
 
 import org.scalatest.{BeforeAndAfter, FunSuite}
+
 import org.apache.spark.deploy.master.MasterSource
 import org.apache.spark.SparkConf
 

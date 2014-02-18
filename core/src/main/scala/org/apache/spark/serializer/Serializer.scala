@@ -22,7 +22,7 @@ import java.nio.ByteBuffer
 
 import it.unimi.dsi.fastutil.io.FastByteArrayOutputStream
 
-import org.apache.spark.util.{NextIterator, ByteBufferInputStream}
+import org.apache.spark.util.{ByteBufferInputStream, NextIterator}
 
 
 /**

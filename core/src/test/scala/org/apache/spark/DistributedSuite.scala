@@ -17,14 +17,14 @@
 
 package org.apache.spark
 
-import network.ConnectionManagerId
 import org.scalatest.BeforeAndAfter
-import org.scalatest.concurrent.Timeouts._
 import org.scalatest.FunSuite
+import org.scalatest.concurrent.Timeouts._
 import org.scalatest.matchers.ShouldMatchers
-import org.scalatest.time.{Span, Millis}
+import org.scalatest.time.{Millis, Span}
 
 import SparkContext._
+import network.ConnectionManagerId
 import org.apache.spark.storage.{BlockManagerWorker, GetBlock, RDDBlockId, StorageLevel}
 
 

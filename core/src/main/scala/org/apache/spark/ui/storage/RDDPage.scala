@@ -23,8 +23,8 @@ import scala.xml.Node
 
 import org.apache.spark.storage.{BlockId, StorageStatus, StorageUtils}
 import org.apache.spark.storage.BlockManagerMasterActor.BlockStatus
-import org.apache.spark.ui.UIUtils._
 import org.apache.spark.ui.Page._
+import org.apache.spark.ui.UIUtils._
 import org.apache.spark.util.Utils
 
 

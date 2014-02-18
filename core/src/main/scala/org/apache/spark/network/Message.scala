@@ -17,8 +17,8 @@
 
 package org.apache.spark.network
 
-import java.nio.ByteBuffer
 import java.net.InetSocketAddress
+import java.nio.ByteBuffer
 
 import scala.collection.mutable.ArrayBuffer
 

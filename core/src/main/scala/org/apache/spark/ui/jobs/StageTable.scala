@@ -19,8 +19,8 @@ package org.apache.spark.ui.jobs
 
 import java.util.Date
 
-import scala.xml.Node
 import scala.collection.mutable.HashSet
+import scala.xml.Node
 
 import org.apache.spark.scheduler.{SchedulingMode, StageInfo, TaskInfo}
 import org.apache.spark.ui.UIUtils
