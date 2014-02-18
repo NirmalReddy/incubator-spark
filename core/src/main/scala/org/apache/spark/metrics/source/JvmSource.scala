@@ -22,10 +22,10 @@ import com.codahale.metrics.jvm.{GarbageCollectorMetricSet, MemoryUsageGaugeSet}
 
 class JvmSource extends Source {
   val sourceName = "jvm"
-  val metricRegistry: MetricRegistry = new MetricRegistry()
+  val metricRegistry = new MetricRegistry()
 
-  val gcMetricSet: GarbageCollectorMetricSet = new GarbageCollectorMetricSet
-  val memGaugeSet: MemoryUsageGaugeSet = new MemoryUsageGaugeSet
+  val gcMetricSet = new GarbageCollectorMetricSet
+  val memGaugeSet = new MemoryUsageGaugeSet
 
   metricRegistry.registerAll(gcMetricSet)
   metricRegistry.registerAll(memGaugeSet)

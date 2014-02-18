@@ -70,7 +70,7 @@ object Partitioner {
  * produce an unexpected or incorrect result.
  */
 class HashPartitioner(partitions: Int) extends Partitioner {
-  def numPartitions = partitions
+  def numPartitions: Int = partitions
 
   def getPartition(key: Any): Int = key match {
     case null => 0
@@ -117,7 +117,7 @@ class RangePartitioner[K <% Ordered[K]: ClassTag, V](
     }
   }
 
-  def numPartitions = partitions
+  def numPartitions: Int = partitions
 
   private val binarySearch: ((Array[K], K) => Int) = CollectionsUtils.makeBinarySearch[K]
 

@@ -754,9 +754,7 @@ class JavaPairDStream[K, V](val dstream: DStream[(K, V)])(
 
 object JavaPairDStream {
   implicit def fromPairDStream[K: ClassTag, V: ClassTag](dstream: DStream[(K, V)])
-  : JavaPairDStream[K, V] = {
-    new JavaPairDStream[K, V](dstream)
-  }
+  : JavaPairDStream[K, V] = new JavaPairDStream[K, V](dstream)
 
   def fromJavaDStream[K, V](dstream: JavaDStream[(K, V)]): JavaPairDStream[K, V] = {
     implicit val cmk: ClassTag[K] =

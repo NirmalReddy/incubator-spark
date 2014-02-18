@@ -23,9 +23,9 @@ import java.util.concurrent.TimeUnit
 import com.codahale.metrics.ganglia.GangliaReporter
 import com.codahale.metrics.MetricRegistry
 import info.ganglia.gmetric4j.gmetric.GMetric
+import info.ganglia.gmetric4j.gmetric.GMetric.UDPAddressingMode
 
 import org.apache.spark.metrics.MetricsSystem
-import info.ganglia.gmetric4j.gmetric.GMetric.UDPAddressingMode
 
 class GangliaSink(val property: Properties, val registry: MetricRegistry) extends Sink {
   val GANGLIA_KEY_PERIOD = "period"
@@ -67,7 +67,7 @@ class GangliaSink(val property: Properties, val registry: MetricRegistry) extend
 
   MetricsSystem.checkMinimalPollingPeriod(pollUnit, pollPeriod)
 
-  val ganglia: GMetric = new GMetric(host, port, mode, ttl)
+  val ganglia = new GMetric(host, port, mode, ttl)
   val reporter: GangliaReporter = GangliaReporter.forRegistry(registry)
       .convertDurationsTo(TimeUnit.MILLISECONDS)
       .convertRatesTo(TimeUnit.SECONDS)

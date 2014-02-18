@@ -29,7 +29,7 @@ import org.apache.spark.{SparkContext, SparkException}
  * Contains util methods to interact with Hadoop from Spark.
  */
 class SparkHadoopUtil {
-  val conf: Configuration = newConfiguration()
+  val conf = newConfiguration()
   UserGroupInformation.setConfiguration(conf)
 
   def runAsUser(user: String)(func: () => Unit) {

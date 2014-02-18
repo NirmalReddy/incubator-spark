@@ -35,8 +35,7 @@ case class CoalescedRDDPartition(
     index: Int,
     @transient rdd: RDD[_],
     parentsIndices: Array[Int],
-    @transient preferredLocation: String = ""
-  ) extends Partition {
+    @transient preferredLocation: String = "") extends Partition {
   var parents: Seq[Partition] = parentsIndices.map(rdd.partitions(_))
 
   @throws(classOf[IOException])
@@ -72,8 +71,8 @@ case class CoalescedRDDPartition(
 class CoalescedRDD[T: ClassTag](
     @transient var prev: RDD[T],
     maxPartitions: Int,
-    balanceSlack: Double = 0.10
-  ) extends RDD[T](prev.context, Nil) {  // Nil since we implement getDependencies
+    balanceSlack: Double = 0.10) extends RDD[T](prev.context, Nil)
+{  // Nil since we implement getDependencies
 
   override def getPartitions: Array[Partition] = {
     val pc = new PartitionCoalescer(maxPartitions, prev, balanceSlack)

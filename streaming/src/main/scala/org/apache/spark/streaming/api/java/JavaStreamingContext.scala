@@ -145,7 +145,7 @@ class JavaStreamingContext(val ssc: StreamingContext) {
   val sc: JavaSparkContext = sparkContext
 
   /** The underlying SparkContext */
-  val sparkContext: JavaSparkContext = new JavaSparkContext(ssc.sc)
+  val sparkContext = new JavaSparkContext(ssc.sc)
 
   /**
    * Create an input stream from network source hostname:port. Data is received using
@@ -185,8 +185,8 @@ class JavaStreamingContext(val ssc: StreamingContext) {
       hostname: String,
       port: Int,
       converter: JFunction[InputStream, java.lang.Iterable[T]],
-      storageLevel: StorageLevel
-    ): JavaDStream[T] = {
+      storageLevel: StorageLevel)
+  : JavaDStream[T] = {
     def fn = (x: InputStream) => converter.apply(x).toIterator
     implicit val cmt: ClassTag[T] =
       implicitly[ClassTag[AnyRef]].asInstanceOf[ClassTag[T]]
@@ -218,8 +218,7 @@ class JavaStreamingContext(val ssc: StreamingContext) {
   def rawSocketStream[T](
       hostname: String,
       port: Int,
-      storageLevel: StorageLevel
-    ): JavaDStream[T] = {
+      storageLevel: StorageLevel): JavaDStream[T] = {
     implicit val cmt: ClassTag[T] =
       implicitly[ClassTag[AnyRef]].asInstanceOf[ClassTag[T]]
     JavaDStream.fromDStream(ssc.rawSocketStream(hostname, port, storageLevel))
@@ -369,8 +368,7 @@ class JavaStreamingContext(val ssc: StreamingContext) {
   def queueStream[T](
       queue: java.util.Queue[JavaRDD[T]],
       oneAtATime: Boolean,
-      defaultRDD: JavaRDD[T]
-    ): JavaDStream[T] = {
+      defaultRDD: JavaRDD[T]): JavaDStream[T] = {
     implicit val cm: ClassTag[T] =
       implicitly[ClassTag[AnyRef]].asInstanceOf[ClassTag[T]]
     val sQueue = new scala.collection.mutable.Queue[RDD[T]]

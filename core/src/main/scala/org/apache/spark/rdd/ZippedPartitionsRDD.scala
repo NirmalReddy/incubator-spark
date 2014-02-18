@@ -17,7 +17,7 @@
 
 package org.apache.spark.rdd
 
-import org.apache.spark._
+import org.apache.spark.{OneToOneDependency, SparkContext, Partition, Partitioner, TaskContext}
 import java.io.{ObjectOutputStream, IOException}
 import scala.reflect.ClassTag
 

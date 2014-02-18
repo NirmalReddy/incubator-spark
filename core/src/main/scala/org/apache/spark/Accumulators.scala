@@ -97,7 +97,7 @@ class Accumulable[R, T] (
    * The typical use of this method is to directly mutate the local value, eg., to add
    * an element to a Set.
    */
-  def localValue = value_
+  def localValue: R = value_
 
   /**
    * Set the accumulator's value; only allowed on master.
