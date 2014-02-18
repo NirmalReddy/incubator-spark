@@ -21,7 +21,6 @@ import scala.reflect.ClassTag
 
 import org.apache.spark.{NarrowDependency, Partition, TaskContext}
 
-
 class PartitionPruningRDDPartition(idx: Int, val parentSplit: Partition) extends Partition {
   override val index = idx
 }

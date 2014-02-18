@@ -20,9 +20,9 @@ package org.apache.spark.serializer
 import java.io.{EOFException, InputStream, OutputStream}
 import java.nio.ByteBuffer
 
-import com.esotericsoftware.kryo.serializers.{JavaSerializer => KryoJavaSerializer}
 import com.esotericsoftware.kryo.{Kryo, KryoException}
 import com.esotericsoftware.kryo.io.{Input => KryoInput, Output => KryoOutput}
+import com.esotericsoftware.kryo.serializers.{JavaSerializer => KryoJavaSerializer}
 import com.twitter.chill.{AllScalaRegistrar, EmptyScalaKryoInstantiator}
 
 import org.apache.spark._

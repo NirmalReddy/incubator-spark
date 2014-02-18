@@ -22,7 +22,6 @@ import scala.collection.mutable.{ArrayBuffer, HashSet}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.storage.{BlockManager, RDDBlockId, StorageLevel}
 
-
 /** Spark class responsible for passing RDDs split contents to the BlockManager and making
     sure a node doesn't load two copies of an RDD at once.
   */

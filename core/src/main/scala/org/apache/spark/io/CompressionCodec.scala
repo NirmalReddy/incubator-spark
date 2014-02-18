@@ -24,7 +24,6 @@ import org.xerial.snappy.{SnappyInputStream, SnappyOutputStream}
 
 import org.apache.spark.SparkConf
 
-
 /**
  * CompressionCodec allows the customization of choosing different compression implementations
  * to be used in block storage.

@@ -26,7 +26,6 @@ import org.apache.spark.scheduler.{SchedulingMode, StageInfo, TaskInfo}
 import org.apache.spark.ui.UIUtils
 import org.apache.spark.util.Utils
 
-
 /** Page showing list of all ongoing and recently finished stages */
 private[spark] class StageTable(val stages: Seq[StageInfo], val parent: JobProgressUI) {
 

@@ -22,7 +22,6 @@ import java.nio.ByteBuffer
 
 import scala.collection.mutable.ArrayBuffer
 
-
 private[spark] abstract class Message(val typ: Long, val id: Int) {
   var senderAddress: InetSocketAddress = null
   var started = false

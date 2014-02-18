@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest
 
 import scala.xml.Node
 
-import org.apache.spark.{ExceptionFailure}
+import org.apache.spark.ExceptionFailure
 import org.apache.spark.executor.TaskMetrics
 import org.apache.spark.scheduler.TaskInfo
 import org.apache.spark.ui.UIUtils._

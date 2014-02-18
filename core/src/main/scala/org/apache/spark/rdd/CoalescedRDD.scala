@@ -17,9 +17,8 @@
 
 package org.apache.spark.rdd
 
-import java.io.{ObjectOutputStream, IOException}
+import java.io.{IOException, ObjectOutputStream}
 
-import scala.Some
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 import scala.reflect.ClassTag

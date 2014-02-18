@@ -21,7 +21,6 @@ import java.util.{Timer, TimerTask}
 
 import org.apache.spark.{Logging, SparkConf}
 
-
 /**
  * Runs a timer task to periodically clean up metadata (e.g. old files or hashtable entries)
  */

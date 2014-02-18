@@ -22,9 +22,7 @@ import scala.concurrent.duration.Duration
 import scala.util.Try
 
 import org.apache.spark.rdd.RDD
-import org.apache.spark.scheduler.{JobSucceeded, JobWaiter}
-import org.apache.spark.scheduler.JobFailed
-
+import org.apache.spark.scheduler.{JobFailed, JobSucceeded, JobWaiter}
 
 /**
  * A future for the result of an action to support cancellation. This is an extension of the

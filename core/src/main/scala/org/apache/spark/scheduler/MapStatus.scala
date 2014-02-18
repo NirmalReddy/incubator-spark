@@ -17,7 +17,7 @@
 
 package org.apache.spark.scheduler
 
-import java.io.{ObjectInput, ObjectOutput, Externalizable}
+import java.io.{Externalizable, ObjectInput, ObjectOutput}
 
 import org.apache.spark.storage.BlockManagerId
 

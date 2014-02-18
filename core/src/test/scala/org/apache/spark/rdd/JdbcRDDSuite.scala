@@ -19,7 +19,7 @@ package org.apache.spark
 
 import java.sql._
 
-import org.scalatest.{ BeforeAndAfter, FunSuite }
+import org.scalatest.{BeforeAndAfter, FunSuite}
 
 import org.apache.spark.rdd.JdbcRDD
 

@@ -33,7 +33,6 @@ import org.apache.spark.ui.Page.Executors
 import org.apache.spark.ui.UIUtils
 import org.apache.spark.util.Utils
 
-
 private[spark] class ExecutorsUI(val sc: SparkContext) {
 
   private var _listener: Option[ExecutorsListener] = None

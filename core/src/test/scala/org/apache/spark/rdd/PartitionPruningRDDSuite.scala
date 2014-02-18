@@ -21,7 +21,6 @@ import org.scalatest.FunSuite
 
 import org.apache.spark.{Partition, SharedSparkContext, TaskContext}
 
-
 class PartitionPruningRDDSuite extends FunSuite with SharedSparkContext {
 
 

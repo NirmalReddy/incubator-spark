@@ -23,7 +23,6 @@ import org.apache.spark.TaskState.TaskState
 import org.apache.spark.scheduler.TaskDescription
 import org.apache.spark.util.{SerializableBuffer, Utils}
 
-
 private[spark] sealed trait CoarseGrainedClusterMessage extends Serializable
 
 private[spark] object CoarseGrainedClusterMessages {

@@ -23,7 +23,6 @@ import org.apache.spark.deploy.DeployMessages.{MasterStateResponse, WorkerStateR
 import org.apache.spark.deploy.master.{ApplicationInfo, DriverInfo, WorkerInfo}
 import org.apache.spark.deploy.worker.ExecutorRunner
 
-
 private[spark] object JsonProtocol {
  def writeWorkerInfo(obj: WorkerInfo) = {
    ("id" -> obj.id) ~

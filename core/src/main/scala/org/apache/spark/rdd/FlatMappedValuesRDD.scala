@@ -19,7 +19,6 @@ package org.apache.spark.rdd
 
 import org.apache.spark.{Partition, TaskContext}
 
-
 private[spark]
 class FlatMappedValuesRDD[K, V, U](prev: RDD[_ <: Product2[K, V]], f: V => TraversableOnce[U])
   extends RDD[(K, U)](prev) {

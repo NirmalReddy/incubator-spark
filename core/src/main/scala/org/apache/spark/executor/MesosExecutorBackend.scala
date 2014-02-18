@@ -28,7 +28,6 @@ import org.apache.spark.TaskState
 import org.apache.spark.TaskState.TaskState
 import org.apache.spark.util.Utils
 
-
 private[spark] class MesosExecutorBackend
   extends MesosExecutor
   with ExecutorBackend

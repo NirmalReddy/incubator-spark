@@ -17,7 +17,6 @@
 
 package org.apache.spark
 
-import scala.collection.mutable.ArrayBuffer
 import scala.math.abs
 
 import org.scalatest.{FunSuite, PrivateMethodTester}

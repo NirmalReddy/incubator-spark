@@ -20,7 +20,6 @@ package org.apache.spark.deploy.worker
 import java.io._
 
 import akka.actor.ActorRef
-
 import com.google.common.base.Charsets
 import com.google.common.io.Files
 

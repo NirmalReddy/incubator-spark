@@ -17,7 +17,7 @@
 
 package org.apache.spark
 
-import java.io.{File}
+import java.io.File
 
 import com.google.common.io.Files
 

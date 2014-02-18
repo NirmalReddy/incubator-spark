@@ -23,7 +23,7 @@ import java.util.jar.{JarEntry, JarOutputStream}
 import com.google.common.io.Files
 import org.scalatest.FunSuite
 
-import SparkContext._
+import org.apache.spark.SparkContext._
 
 class FileServerSuite extends FunSuite with LocalSparkContext {
 

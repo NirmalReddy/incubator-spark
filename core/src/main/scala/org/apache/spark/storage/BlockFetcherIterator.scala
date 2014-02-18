@@ -32,7 +32,6 @@ import org.apache.spark.network.netty.ShuffleCopier
 import org.apache.spark.serializer.Serializer
 import org.apache.spark.util.Utils
 
-
 /**
  * A block fetcher iterator interface. There are two implementations:
  *

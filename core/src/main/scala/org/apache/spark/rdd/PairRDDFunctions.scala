@@ -26,7 +26,7 @@ import scala.collection.JavaConversions._
 import scala.collection.Map
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
-import scala.reflect.{ClassTag}
+import scala.reflect.ClassTag
 
 import com.clearspring.analytics.stream.cardinality.HyperLogLog
 import org.apache.hadoop.conf.Configuration

@@ -23,7 +23,6 @@ import scala.reflect.ClassTag
 
 import org.apache.spark.{OneToOneDependency, Partition, SparkContext, TaskContext}
 
-
 /**
  * Class representing partitions of PartitionerAwareUnionRDD, which maintains the list of
  * corresponding partitions of parent RDDs.

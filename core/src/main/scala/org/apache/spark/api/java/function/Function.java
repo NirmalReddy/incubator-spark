@@ -22,7 +22,6 @@ import java.io.Serializable;
 import scala.reflect.ClassTag;
 import scala.reflect.ClassTag$;
 
-
 /**
  * Base class for functions whose return types do not create special RDDs. PairFunction and
  * DoubleFunction are handled separately, to allow PairRDDs and DoubleRDDs to be constructed

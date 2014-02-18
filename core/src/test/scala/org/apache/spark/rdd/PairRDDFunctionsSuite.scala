@@ -27,7 +27,6 @@ import com.google.common.io.Files
 import org.apache.spark.SparkContext._
 import org.apache.spark.{Partitioner, SharedSparkContext}
 
-
 class PairRDDFunctionsSuite extends FunSuite with SharedSparkContext {
   test("groupByKey") {
     val pairs = sc.parallelize(Array((1, 1), (1, 2), (1, 3), (2, 1)))

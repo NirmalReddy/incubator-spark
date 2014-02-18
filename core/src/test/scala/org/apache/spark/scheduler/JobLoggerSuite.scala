@@ -24,7 +24,6 @@ import org.apache.spark._
 import org.apache.spark.SparkContext._
 import org.apache.spark.rdd.RDD
 
-
 class JobLoggerSuite extends FunSuite with LocalSparkContext with ShouldMatchers {
   val WAIT_TIMEOUT_MILLIS = 10000
 

@@ -29,7 +29,6 @@ import org.apache.spark.{Logging, SparkConf}
 import org.apache.spark.network.ConnectionManagerId
 import org.apache.spark.storage.BlockId
 
-
 private[spark] class ShuffleCopier(conf: SparkConf) extends Logging {
 
   def getBlock(host: String, port: Int, blockId: BlockId,

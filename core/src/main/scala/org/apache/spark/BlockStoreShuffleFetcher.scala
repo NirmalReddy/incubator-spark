@@ -25,7 +25,6 @@ import org.apache.spark.serializer.Serializer
 import org.apache.spark.storage.{BlockId, BlockManagerId, ShuffleBlockId}
 import org.apache.spark.util.CompletionIterator
 
-
 private[spark] class BlockStoreShuffleFetcher extends ShuffleFetcher with Logging {
 
   override def fetch[T](

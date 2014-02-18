@@ -20,7 +20,6 @@ package org.apache.spark
 import scala.collection.JavaConverters._
 import scala.collection.mutable.HashMap
 
-
 /**
  * Configuration for a Spark application. Used to set various Spark parameters as key-value pairs.
  *

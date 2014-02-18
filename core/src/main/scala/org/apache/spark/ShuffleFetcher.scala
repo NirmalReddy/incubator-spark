@@ -19,7 +19,6 @@ package org.apache.spark
 
 import org.apache.spark.serializer.Serializer
 
-
 private[spark] abstract class ShuffleFetcher {
 
   /**

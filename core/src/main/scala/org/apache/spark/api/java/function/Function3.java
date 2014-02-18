@@ -22,7 +22,6 @@ import java.io.Serializable;
 import scala.reflect.ClassTag;
 import scala.reflect.ClassTag$;
 
-
 /**
  * A three-argument function that takes arguments of type T1, T2 and T3 and returns an R.
  */

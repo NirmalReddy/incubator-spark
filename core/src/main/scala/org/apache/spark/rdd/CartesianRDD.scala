@@ -23,7 +23,6 @@ import scala.reflect.ClassTag
 
 import org.apache.spark._
 
-
 private[spark]
 class CartesianPartition(
     idx: Int,

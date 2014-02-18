@@ -37,7 +37,6 @@ import org.apache.spark.{Logging, SparkConf, SparkException}
 import org.apache.spark.serializer.{DeserializationStream, SerializationStream, SerializerInstance}
 import org.apache.spark.deploy.SparkHadoopUtil
 
-
 /**
  * Various utility methods used by Spark.
  */

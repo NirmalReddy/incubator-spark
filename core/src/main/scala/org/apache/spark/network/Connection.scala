@@ -17,11 +17,11 @@
 
 package org.apache.spark.network
 
-import scala.collection.mutable.{HashMap, Queue, ArrayBuffer}
-
+import java.net._
 import java.nio._
 import java.nio.channels._
-import java.net._
+
+import scala.collection.mutable.{ArrayBuffer, HashMap, Queue}
 
 import org.apache.spark._
 

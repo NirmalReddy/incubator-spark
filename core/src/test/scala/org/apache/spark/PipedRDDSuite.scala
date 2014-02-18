@@ -19,8 +19,6 @@ package org.apache.spark
 
 import org.scalatest.FunSuite
 
-import SparkContext._
-
 class PipedRDDSuite extends FunSuite with SharedSparkContext {
 
   test("basic pipe") {

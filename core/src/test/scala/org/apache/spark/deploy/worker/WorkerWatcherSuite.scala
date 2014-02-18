@@ -22,8 +22,6 @@ import akka.testkit.TestActorRef
 import akka.remote.DisassociatedEvent
 import org.scalatest.FunSuite
 
-
-
 class WorkerWatcherSuite extends FunSuite {
   test("WorkerWatcher shuts down on valid disassociation") {
     val actorSystem = ActorSystem("test")

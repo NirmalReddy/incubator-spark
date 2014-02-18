@@ -17,10 +17,9 @@
 
 package org.apache.spark.network
 
-import java.nio.ByteBuffer
 import java.net.InetAddress
 import java.net.InetSocketAddress
-
+import java.nio.ByteBuffer
 
 private[spark] class MessageChunkHeader(
     val typ: Long,

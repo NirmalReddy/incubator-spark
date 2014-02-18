@@ -27,7 +27,6 @@ import org.apache.spark.ui.Page._
 import org.apache.spark.ui.UIUtils._
 import org.apache.spark.util.Utils
 
-
 /** Page showing storage details for a given RDD */
 private[spark] class RDDPage(parent: BlockManagerUI) {
   val sc = parent.sc

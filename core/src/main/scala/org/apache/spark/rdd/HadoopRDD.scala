@@ -32,7 +32,6 @@ import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.deploy.SparkHadoopUtil
 import org.apache.spark.util.NextIterator
 
-
 /**
  * A Spark split class that wraps around a Hadoop InputSplit.
  */

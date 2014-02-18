@@ -31,7 +31,6 @@ import org.eclipse.jetty.util.thread.QueuedThreadPool
 
 import org.apache.spark.Logging
 
-
 /** Utilities for launching a web server using Jetty's HTTP Server class */
 private[spark] object JettyUtils extends Logging {
   // Base type for a function that returns something based on an HTTP request. Allows for

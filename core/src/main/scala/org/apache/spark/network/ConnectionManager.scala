@@ -17,10 +17,10 @@
 
 package org.apache.spark.network
 
+import java.net._
 import java.nio._
 import java.nio.channels._
 import java.nio.channels.spi._
-import java.net._
 import java.util.concurrent.{LinkedBlockingDeque, TimeUnit, ThreadPoolExecutor}
 
 import scala.collection.mutable.ArrayBuffer

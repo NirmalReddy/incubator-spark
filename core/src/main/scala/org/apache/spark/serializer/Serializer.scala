@@ -24,7 +24,6 @@ import it.unimi.dsi.fastutil.io.FastByteArrayOutputStream
 
 import org.apache.spark.util.{ByteBufferInputStream, NextIterator}
 
-
 /**
  * A serializer. Because some serialization libraries are not thread safe, this class is used to
  * create [[org.apache.spark.serializer.SerializerInstance]] objects that do the actual

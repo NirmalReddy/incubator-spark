@@ -48,7 +48,6 @@ import org.apache.spark.partial.PartialResult;
 import org.apache.spark.storage.StorageLevel;
 import org.apache.spark.util.StatCounter;
 
-
 // The test suite itself is Serializable so that anonymous Function implementations can be
 // serialized, as an alternative to converting these anonymous classes to static inner classes;
 // see http://stackoverflow.com/questions/758570/.

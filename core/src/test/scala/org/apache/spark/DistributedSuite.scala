@@ -23,10 +23,9 @@ import org.scalatest.concurrent.Timeouts._
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.time.{Millis, Span}
 
-import SparkContext._
-import network.ConnectionManagerId
+import org.apache.spark.SparkContext._
+import org.apache.spark.network.ConnectionManagerId
 import org.apache.spark.storage.{BlockManagerWorker, GetBlock, RDDBlockId, StorageLevel}
-
 
 class NotSerializableClass
 class NotSerializableExn(val notSer: NotSerializableClass) extends Throwable() {}

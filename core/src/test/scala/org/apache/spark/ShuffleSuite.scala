@@ -26,7 +26,6 @@ import org.apache.spark.rdd.{CoGroupedRDD, OrderedRDDFunctions, RDD, ShuffledRDD
 import org.apache.spark.serializer.KryoSerializer
 import org.apache.spark.util.MutablePair
 
-
 class ShuffleSuite extends FunSuite with ShouldMatchers with LocalSparkContext {
   test("groupByKey without compression") {
     try {
