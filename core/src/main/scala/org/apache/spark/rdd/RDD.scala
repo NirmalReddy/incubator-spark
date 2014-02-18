@@ -124,7 +124,7 @@ abstract class RDD[T: ClassTag](
   @transient var name: String = null
 
   /** Assign a name to this RDD */
-  def setName(_name: String) = {
+  def setName(_name: String): RDD[T] = {
     name = _name
     this
   }
@@ -133,7 +133,7 @@ abstract class RDD[T: ClassTag](
   @transient var generator = Utils.getCallSiteInfo.firstUserClass
 
   /** Reset generator*/
-  def setGenerator(_generator: String) = {
+  def setGenerator(_generator: String) {
     generator = _generator
   }
 
@@ -175,7 +175,7 @@ abstract class RDD[T: ClassTag](
   }
 
   /** Get the RDD's current storage level, or StorageLevel.NONE if none is set. */
-  def getStorageLevel = storageLevel
+  def getStorageLevel: StorageLevel = storageLevel
 
   // Our dependencies and partitions will be gotten by calling subclass's methods below, and will
   // be overwritten when we're checkpointed
@@ -1043,7 +1043,7 @@ abstract class RDD[T: ClassTag](
   }
 
   /** The [[org.apache.spark.SparkContext]] that this RDD was created on. */
-  def context = sc
+  def context: SparkContext = sc
 
   // Avoid handling doCheckpoint multiple times to prevent excessive recursion
   @transient private var doCheckpointCalled = false

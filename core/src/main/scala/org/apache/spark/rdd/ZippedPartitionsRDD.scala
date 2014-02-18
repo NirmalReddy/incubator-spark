@@ -17,7 +17,7 @@
 
 package org.apache.spark.rdd
 
-import org.apache.spark.{OneToOneDependency, SparkContext, Partition, TaskContext}
+import org.apache.spark._
 import java.io.{ObjectOutputStream, IOException}
 import scala.reflect.ClassTag
 
@@ -45,7 +45,7 @@ abstract class ZippedPartitionsBaseRDD[V: ClassTag](
     preservesPartitioning: Boolean = false)
   extends RDD[V](sc, rdds.map(x => new OneToOneDependency(x))) {
 
-  override val partitioner =
+  override val partitioner: Option[Partitioner] =
     if (preservesPartitioning) firstParent[Any].partitioner else None
 
   override def getPartitions: Array[Partition] = {
