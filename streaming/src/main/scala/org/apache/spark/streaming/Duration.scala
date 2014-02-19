@@ -61,7 +61,7 @@ case class Duration (private val millis: Long) {
  * a given number of milliseconds.
  */
 object Milliseconds {
-  def apply(milliseconds: Long): Duration = new Duration(milliseconds)
+  def apply(milliseconds: Long) = new Duration(milliseconds)
 }
 
 /**
@@ -69,7 +69,7 @@ object Milliseconds {
  * a given number of seconds.
  */
 object Seconds {
-  def apply(seconds: Long): Duration = new Duration(seconds * 1000)
+  def apply(seconds: Long) = new Duration(seconds * 1000)
 }
 
 /**
@@ -77,7 +77,7 @@ object Seconds {
  * a given number of minutes.
  */
 object Minutes {
-  def apply(minutes: Long): Duration = new Duration(minutes * 60000)
+  def apply(minutes: Long) = new Duration(minutes * 60000)
 }
 
 

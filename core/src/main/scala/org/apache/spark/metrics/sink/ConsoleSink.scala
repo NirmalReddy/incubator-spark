@@ -31,7 +31,7 @@ class ConsoleSink(val property: Properties, val registry: MetricRegistry) extend
   val CONSOLE_KEY_PERIOD = "period"
   val CONSOLE_KEY_UNIT = "unit"
 
-  val pollPeriod: Int = Option(property.getProperty(CONSOLE_KEY_PERIOD)) match {
+  val pollPeriod = Option(property.getProperty(CONSOLE_KEY_PERIOD)) match {
     case Some(s) => s.toInt
     case None => CONSOLE_DEFAULT_PERIOD
   }

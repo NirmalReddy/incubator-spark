@@ -69,7 +69,7 @@ class LinearRegressionWithSGD private (
    */
   def this() = this(1.0, 100, 1.0)
 
-  def createModel(weights: Array[Double], intercept: Double): LinearRegressionModel = {
+  def createModel(weights: Array[Double], intercept: Double) = {
     new LinearRegressionModel(weights, intercept)
   }
 }

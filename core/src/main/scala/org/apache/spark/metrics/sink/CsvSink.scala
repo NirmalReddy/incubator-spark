@@ -34,7 +34,7 @@ class CsvSink(val property: Properties, val registry: MetricRegistry) extends Si
   val CSV_DEFAULT_UNIT = "SECONDS"
   val CSV_DEFAULT_DIR = "/tmp/"
 
-  val pollPeriod: Int = Option(property.getProperty(CSV_KEY_PERIOD)) match {
+  val pollPeriod = Option(property.getProperty(CSV_KEY_PERIOD)) match {
     case Some(s) => s.toInt
     case None => CSV_DEFAULT_PERIOD
   }
@@ -46,7 +46,7 @@ class CsvSink(val property: Properties, val registry: MetricRegistry) extends Si
   
   MetricsSystem.checkMinimalPollingPeriod(pollUnit, pollPeriod)
 
-  val pollDir: String = Option(property.getProperty(CSV_KEY_DIR)) match {
+  val pollDir = Option(property.getProperty(CSV_KEY_DIR)) match {
     case Some(s) => s
     case None => CSV_DEFAULT_DIR
   }

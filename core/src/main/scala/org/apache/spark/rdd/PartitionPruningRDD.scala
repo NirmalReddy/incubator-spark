@@ -23,7 +23,7 @@ import org.apache.spark.{NarrowDependency, SparkEnv, Partition, TaskContext}
 
 
 class PartitionPruningRDDPartition(idx: Int, val parentSplit: Partition) extends Partition {
-  override val index: Int = idx
+  override val index = idx
 }
 
 
@@ -70,7 +70,7 @@ object PartitionPruningRDD {
    * Create a PartitionPruningRDD. This function can be used to create the PartitionPruningRDD
    * when its type T is not known at compile time.
    */
-  def create[T](rdd: RDD[T], partitionFilterFunc: Int => Boolean): PartitionPruningRDD[T] = {
+  def create[T](rdd: RDD[T], partitionFilterFunc: Int => Boolean) = {
     new PartitionPruningRDD[T](rdd, partitionFilterFunc)(rdd.elementClassTag)
   }
 }

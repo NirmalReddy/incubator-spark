@@ -38,7 +38,6 @@ import org.apache.hadoop.mapreduce.{InputFormat => NewInputFormat, Job => NewHad
 import org.apache.hadoop.mapreduce.lib.input.{FileInputFormat => NewFileInputFormat}
 import org.apache.mesos.MesosNativeLibrary
 
-import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.deploy.{LocalSparkCluster, SparkHadoopUtil}
 import org.apache.spark.partial.{ApproximateEvaluator, PartialResult}
 import org.apache.spark.rdd._
@@ -592,9 +591,7 @@ class SparkContext(
    * Create an [[org.apache.spark.Accumulator]] variable of a given type, which tasks can "add"
    * values to using the `+=` method. Only the driver can access the accumulator's `value`.
    */
-  def accumulator[T]
-      (initialValue: T)
-      (implicit param: AccumulatorParam[T]): Accumulator[T] =
+  def accumulator[T](initialValue: T)(implicit param: AccumulatorParam[T]) =
     new Accumulator(initialValue, param)
 
   /**
@@ -603,8 +600,8 @@ class SparkContext(
    * @tparam T accumulator type
    * @tparam R type that can be added to the accumulator
    */
-  def accumulable[T, R](initialValue: T)(implicit param: AccumulableParam[T, R])
-  : Accumulable[T, R] = new Accumulable(initialValue, param)
+  def accumulable[T, R](initialValue: T)(implicit param: AccumulableParam[T, R]) =
+    new Accumulable(initialValue, param)
 
   /**
    * Create an accumulator from a "mutable collection" type.
@@ -623,7 +620,7 @@ class SparkContext(
    * [[org.apache.spark.broadcast.Broadcast]] object for reading it in distributed functions.
    * The variable will be sent to each cluster only once.
    */
-  def broadcast[T](value: T): Broadcast[T] = env.broadcastManager.newBroadcast[T](value, isLocal)
+  def broadcast[T](value: T) = env.broadcastManager.newBroadcast[T](value, isLocal)
 
   /**
    * Add a file to be downloaded with this Spark job on every node.
@@ -1062,12 +1059,10 @@ object SparkContext {
 
   // TODO: Add AccumulatorParams for other types, e.g. lists and strings
 
-  implicit def rddToPairRDDFunctions[K: ClassTag, V: ClassTag]
-      (rdd: RDD[(K, V)]): PairRDDFunctions[K, V] =
+  implicit def rddToPairRDDFunctions[K: ClassTag, V: ClassTag](rdd: RDD[(K, V)]) =
     new PairRDDFunctions(rdd)
 
-  implicit def rddToAsyncRDDActions[T: ClassTag](rdd: RDD[T]): AsyncRDDActions[T] =
-    new AsyncRDDActions(rdd)
+  implicit def rddToAsyncRDDActions[T: ClassTag](rdd: RDD[T]) = new AsyncRDDActions(rdd)
 
   implicit def rddToSequenceFileRDDFunctions[K <% Writable: ClassTag, V <% Writable: ClassTag](
       rdd: RDD[(K, V)]) =
@@ -1077,30 +1072,27 @@ object SparkContext {
       rdd: RDD[(K, V)]) =
     new OrderedRDDFunctions[K, V, (K, V)](rdd)
 
-  implicit def doubleRDDToDoubleRDDFunctions(rdd: RDD[Double]): DoubleRDDFunctions =
-    new DoubleRDDFunctions(rdd)
+  implicit def doubleRDDToDoubleRDDFunctions(rdd: RDD[Double]) = new DoubleRDDFunctions(rdd)
 
-  implicit def numericRDDToDoubleRDDFunctions[T]
-      (rdd: RDD[T])
-      (implicit num: Numeric[T]): DoubleRDDFunctions =
+  implicit def numericRDDToDoubleRDDFunctions[T](rdd: RDD[T])(implicit num: Numeric[T]) =
     new DoubleRDDFunctions(rdd.map(x => num.toDouble(x)))
 
 
   // Implicit conversions to common Writable types, for saveAsSequenceFile
 
-  implicit def intToIntWritable(i: Int): IntWritable = new IntWritable(i)
+  implicit def intToIntWritable(i: Int) = new IntWritable(i)
 
-  implicit def longToLongWritable(l: Long): LongWritable = new LongWritable(l)
+  implicit def longToLongWritable(l: Long) = new LongWritable(l)
 
-  implicit def floatToFloatWritable(f: Float): FloatWritable = new FloatWritable(f)
+  implicit def floatToFloatWritable(f: Float) = new FloatWritable(f)
 
-  implicit def doubleToDoubleWritable(d: Double): DoubleWritable = new DoubleWritable(d)
+  implicit def doubleToDoubleWritable(d: Double) = new DoubleWritable(d)
 
-  implicit def boolToBoolWritable (b: Boolean): BooleanWritable = new BooleanWritable(b)
+  implicit def boolToBoolWritable (b: Boolean) = new BooleanWritable(b)
 
-  implicit def bytesToBytesWritable (aob: Array[Byte]): BytesWritable = new BytesWritable(aob)
+  implicit def bytesToBytesWritable (aob: Array[Byte]) = new BytesWritable(aob)
 
-  implicit def stringToText(s: String): Text = new Text(s)
+  implicit def stringToText(s: String) = new Text(s)
 
   private implicit def arrayToArrayWritable[T <% Writable: ClassTag]
       (arr: Traversable[T]): ArrayWritable = {

@@ -73,7 +73,7 @@ class LogisticRegressionWithSGD private (
    */
   def this() = this(1.0, 100, 0.0, 1.0)
 
-  def createModel(weights: Array[Double], intercept: Double): LogisticRegressionModel = {
+  def createModel(weights: Array[Double], intercept: Double) = {
     new LogisticRegressionModel(weights, intercept)
   }
 }

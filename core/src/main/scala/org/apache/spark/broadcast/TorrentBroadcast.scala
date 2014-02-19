@@ -244,7 +244,7 @@ class TorrentBroadcastFactory extends BroadcastFactory {
 
   def initialize(isDriver: Boolean, conf: SparkConf) { TorrentBroadcast.initialize(isDriver, conf) }
 
-  def newBroadcast[T](value_ : T, isLocal: Boolean, id: Long): TorrentBroadcast[T] =
+  def newBroadcast[T](value_ : T, isLocal: Boolean, id: Long) =
     new TorrentBroadcast[T](value_, isLocal, id)
 
   def stop() { TorrentBroadcast.stop() }

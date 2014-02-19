@@ -296,7 +296,7 @@ class JavaStreamingContext(val ssc: StreamingContext) {
       props: Props,
       name: String,
       storageLevel: StorageLevel
-    ): JavaDStream[T] = {
+  ): JavaDStream[T] = {
     implicit val cm: ClassTag[T] =
       implicitly[ClassTag[AnyRef]].asInstanceOf[ClassTag[T]]
     ssc.actorStream[T](props, name, storageLevel)

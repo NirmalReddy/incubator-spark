@@ -69,7 +69,7 @@ private[spark] class HttpBroadcast[T](@transient var value_ : T, isLocal: Boolea
 class HttpBroadcastFactory extends BroadcastFactory {
   def initialize(isDriver: Boolean, conf: SparkConf) { HttpBroadcast.initialize(isDriver, conf) }
 
-  def newBroadcast[T](value_ : T, isLocal: Boolean, id: Long): HttpBroadcast[T] =
+  def newBroadcast[T](value_ : T, isLocal: Boolean, id: Long) =
     new HttpBroadcast[T](value_, isLocal, id)
 
   def stop() { HttpBroadcast.stop() }

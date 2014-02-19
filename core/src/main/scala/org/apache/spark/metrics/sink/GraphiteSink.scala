@@ -47,10 +47,10 @@ class GraphiteSink(val property: Properties, val registry: MetricRegistry) exten
     throw new Exception("Graphite sink requires 'port' property.")
   }
 
-  val host: String = propertyToOption(GRAPHITE_KEY_HOST).get
-  val port: Int = propertyToOption(GRAPHITE_KEY_PORT).get.toInt
+  val host = propertyToOption(GRAPHITE_KEY_HOST).get
+  val port = propertyToOption(GRAPHITE_KEY_PORT).get.toInt
 
-  val pollPeriod: Int = propertyToOption(GRAPHITE_KEY_PERIOD) match {
+  val pollPeriod = propertyToOption(GRAPHITE_KEY_PERIOD) match {
     case Some(s) => s.toInt
     case None => GRAPHITE_DEFAULT_PERIOD
   }
@@ -60,7 +60,7 @@ class GraphiteSink(val property: Properties, val registry: MetricRegistry) exten
     case None => TimeUnit.valueOf(GRAPHITE_DEFAULT_UNIT)
   }
 
-  val prefix: String = propertyToOption(GRAPHITE_KEY_PREFIX).getOrElse(GRAPHITE_DEFAULT_PREFIX)
+  val prefix = propertyToOption(GRAPHITE_KEY_PREFIX).getOrElse(GRAPHITE_DEFAULT_PREFIX)
 
   MetricsSystem.checkMinimalPollingPeriod(pollUnit, pollPeriod)
 

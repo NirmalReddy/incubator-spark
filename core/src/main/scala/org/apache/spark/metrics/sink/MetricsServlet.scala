@@ -36,9 +36,9 @@ class MetricsServlet(val property: Properties, val registry: MetricRegistry) ext
 
   val SERVLET_DEFAULT_SAMPLE = false
 
-  val servletPath: String = property.getProperty(SERVLET_KEY_PATH)
+  val servletPath = property.getProperty(SERVLET_KEY_PATH)
 
-  val servletShowSample: Boolean = Option(property.getProperty(SERVLET_KEY_SAMPLE)).map(_.toBoolean)
+  val servletShowSample = Option(property.getProperty(SERVLET_KEY_SAMPLE)).map(_.toBoolean)
     .getOrElse(SERVLET_DEFAULT_SAMPLE)
 
   val mapper: ObjectMapper = new ObjectMapper().registerModule(
