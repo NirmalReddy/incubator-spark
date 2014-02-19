@@ -42,8 +42,8 @@ class Distribution(val data: Array[Double], val startIdx: Int, val endIdx: Int) 
    * given from 0 to 1
    * @param probabilities
    */
-  def getQuantiles(probabilities: Traversable[Double] = defaultProbabilities)
-  : IndexedSeq[Double] = probabilities.toIndexedSeq.map{p:Double => data(closestIndex(p))}
+  def getQuantiles(probabilities: Traversable[Double] = defaultProbabilities): IndexedSeq[Double] =
+    probabilities.toIndexedSeq.map{p:Double => data(closestIndex(p))}
 
   private def closestIndex(p: Double) = {
     math.min((p * length).toInt + startIdx, endIdx - 1)

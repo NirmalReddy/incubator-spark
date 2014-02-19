@@ -126,8 +126,8 @@ object StorageLevel {
   val MEMORY_AND_DISK_SER_2 = new StorageLevel(true, true, false, 2)
 
   /** Create a new StorageLevel object */
-  def apply(useDisk: Boolean, useMemory: Boolean, deserialized: Boolean, replication: Int = 1)
-  : StorageLevel = {
+  def apply(useDisk: Boolean, useMemory: Boolean, deserialized: Boolean,
+      replication: Int = 1): StorageLevel = {
     getCachedStorageLevel(new StorageLevel(useDisk, useMemory, deserialized, replication))
   }
 

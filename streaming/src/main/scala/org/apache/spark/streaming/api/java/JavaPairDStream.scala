@@ -227,8 +227,8 @@ class JavaPairDStream[K, V](val dstream: DStream[(K, V)])(
    *                       DStream's batching interval
    * @param numPartitions  Number of partitions of each RDD in the new DStream.
    */
-  def groupByKeyAndWindow(windowDuration: Duration, slideDuration: Duration, numPartitions: Int)
-  : JavaPairDStream[K, JList[V]] = {
+  def groupByKeyAndWindow(windowDuration: Duration, slideDuration: Duration,
+      numPartitions: Int): JavaPairDStream[K, JList[V]] = {
     dstream.groupByKeyAndWindow(windowDuration, slideDuration, numPartitions)
       .mapValues(seqAsJavaList _)
   }
@@ -247,8 +247,7 @@ class JavaPairDStream[K, V](val dstream: DStream[(K, V)])(
   def groupByKeyAndWindow(
       windowDuration: Duration,
       slideDuration: Duration,
-      partitioner: Partitioner
-    ): JavaPairDStream[K, JList[V]] = {
+      partitioner: Partitioner): JavaPairDStream[K, JList[V]] = {
     dstream.groupByKeyAndWindow(windowDuration, slideDuration, partitioner)
       .mapValues(seqAsJavaList _)
   }
@@ -262,8 +261,9 @@ class JavaPairDStream[K, V](val dstream: DStream[(K, V)])(
    * @param windowDuration width of the window; must be a multiple of this DStream's
    *                       batching interval
    */
-  def reduceByKeyAndWindow(reduceFunc: Function2[V, V, V], windowDuration: Duration)
-  : JavaPairDStream[K, V] = {
+  def reduceByKeyAndWindow(
+      reduceFunc: Function2[V, V, V],
+      windowDuration: Duration): JavaPairDStream[K, V] = {
     dstream.reduceByKeyAndWindow(reduceFunc, windowDuration)
   }
 
@@ -281,8 +281,7 @@ class JavaPairDStream[K, V](val dstream: DStream[(K, V)])(
   def reduceByKeyAndWindow(
       reduceFunc: Function2[V, V, V],
       windowDuration: Duration,
-      slideDuration: Duration
-    ): JavaPairDStream[K, V] = {
+      slideDuration: Duration): JavaPairDStream[K, V] = {
     dstream.reduceByKeyAndWindow(reduceFunc, windowDuration, slideDuration)
   }
 
@@ -451,8 +450,8 @@ class JavaPairDStream[K, V](val dstream: DStream[(K, V)])(
    *                   corresponding state key-value pair will be eliminated.
    * @tparam S State type
    */
-  def updateStateByKey[S](updateFunc: JFunction2[JList[V], Optional[S], Optional[S]])
-  : JavaPairDStream[K, S] = {
+  def updateStateByKey[S](updateFunc: JFunction2[JList[V], Optional[S],
+      Optional[S]]): JavaPairDStream[K, S] = {
     implicit val cm: ClassTag[S] =
       implicitly[ClassTag[AnyRef]].asInstanceOf[ClassTag[S]]
     dstream.updateStateByKey(convertUpdateStateFunction(updateFunc))
@@ -753,8 +752,8 @@ class JavaPairDStream[K, V](val dstream: DStream[(K, V)])(
 }
 
 object JavaPairDStream {
-  implicit def fromPairDStream[K: ClassTag, V: ClassTag](dstream: DStream[(K, V)])
-  : JavaPairDStream[K, V] = new JavaPairDStream[K, V](dstream)
+  implicit def fromPairDStream[K: ClassTag, V: ClassTag]
+      (dstream: DStream[(K, V)]): JavaPairDStream[K, V] = new JavaPairDStream[K, V](dstream)
 
   def fromJavaDStream[K, V](dstream: JavaDStream[(K, V)]): JavaPairDStream[K, V] = {
     implicit val cmk: ClassTag[K] =
@@ -764,8 +763,7 @@ object JavaPairDStream {
     new JavaPairDStream[K, V](dstream.dstream)
   }
 
-  def scalaToJavaLong[K: ClassTag](dstream: JavaPairDStream[K, Long])
-  : JavaPairDStream[K, JLong] = {
+  def scalaToJavaLong[K: ClassTag](dstream: JavaPairDStream[K, Long]): JavaPairDStream[K, JLong] = {
     StreamingContext.toPairDStreamFunctions(dstream.dstream).mapValues(new JLong(_))
   }
 }

@@ -592,7 +592,9 @@ class SparkContext(
    * Create an [[org.apache.spark.Accumulator]] variable of a given type, which tasks can "add"
    * values to using the `+=` method. Only the driver can access the accumulator's `value`.
    */
-  def accumulator[T](initialValue: T)(implicit param: AccumulatorParam[T]): Accumulator[T] =
+  def accumulator[T]
+      (initialValue: T)
+      (implicit param: AccumulatorParam[T]): Accumulator[T] =
     new Accumulator(initialValue, param)
 
   /**
@@ -1060,8 +1062,9 @@ object SparkContext {
 
   // TODO: Add AccumulatorParams for other types, e.g. lists and strings
 
-  implicit def rddToPairRDDFunctions[K: ClassTag, V: ClassTag](rdd: RDD[(K, V)])
-  : PairRDDFunctions[K, V] = new PairRDDFunctions(rdd)
+  implicit def rddToPairRDDFunctions[K: ClassTag, V: ClassTag]
+      (rdd: RDD[(K, V)]): PairRDDFunctions[K, V] =
+    new PairRDDFunctions(rdd)
 
   implicit def rddToAsyncRDDActions[T: ClassTag](rdd: RDD[T]): AsyncRDDActions[T] =
     new AsyncRDDActions(rdd)
@@ -1077,8 +1080,10 @@ object SparkContext {
   implicit def doubleRDDToDoubleRDDFunctions(rdd: RDD[Double]): DoubleRDDFunctions =
     new DoubleRDDFunctions(rdd)
 
-  implicit def numericRDDToDoubleRDDFunctions[T](rdd: RDD[T])(implicit num: Numeric[T])
-  : DoubleRDDFunctions = new DoubleRDDFunctions(rdd.map(x => num.toDouble(x)))
+  implicit def numericRDDToDoubleRDDFunctions[T]
+      (rdd: RDD[T])
+      (implicit num: Numeric[T]): DoubleRDDFunctions =
+    new DoubleRDDFunctions(rdd.map(x => num.toDouble(x)))
 
 
   // Implicit conversions to common Writable types, for saveAsSequenceFile
@@ -1097,8 +1102,8 @@ object SparkContext {
 
   implicit def stringToText(s: String): Text = new Text(s)
 
-  private implicit def arrayToArrayWritable[T <% Writable: ClassTag](arr: Traversable[T])
-    : ArrayWritable = {
+  private implicit def arrayToArrayWritable[T <% Writable: ClassTag]
+      (arr: Traversable[T]): ArrayWritable = {
     def anyToWritable[U <% Writable](u: U): Writable = u
 
     new ArrayWritable(classTag[T].runtimeClass.asInstanceOf[Class[Writable]],
@@ -1130,7 +1135,7 @@ object SparkContext {
     simpleWritableConverter[Array[Byte], BytesWritable](_.getBytes)
   }
 
-  implicit def stringWritableConverter() =
+  implicit def stringWritableConverter(): WritableConverter[String] =
     simpleWritableConverter[String, Text](_.toString)
 
   implicit def writableWritableConverter[T <: Writable](): WritableConverter[T] =
